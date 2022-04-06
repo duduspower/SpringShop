@@ -7,19 +7,21 @@ import javax.validation.constraints.NotBlank;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+//    @NotBlank
     private String name;
 
-    @NotBlank
+//    @NotBlank
     private float price;
 
-    @NotBlank
+//    @NotBlank
     private float weight;
 
+//    @NotBlank
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Product() {
@@ -30,13 +32,6 @@ public class Product {
         this.price = price;
         this.weight = weight;
         this.category = category;
-    }
-
-
-    public Product(String name, float price, float weight) {
-        this.name = name;
-        this.price = price;
-        this.weight = weight;
     }
 
     public int getId() {
@@ -78,4 +73,5 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }

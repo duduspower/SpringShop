@@ -4,24 +4,25 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Cart{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank(message = "Your CART must have NAME!")
     private String name;
 
 //    @NotBlank
-//    @ManyToOne
-//    private User user;
-//
+    @ManyToOne
+    private User user;
+
 //    @NotBlank
-//    @OneToMany
-//    private List<Product> productsList;
+    @OneToMany
+    private Set<Product> productsList;
 
     private LocalDateTime createDate;
 
@@ -30,13 +31,13 @@ public class Cart{
     public Cart() {
     }
 
-//    public Cart(String name, User user, List<Product> productsList, LocalDateTime createDate, LocalDateTime updateDate) {
-//        this.name = name;
-//        this.user = user;
-//        this.productsList = productsList;
-//        this.createDate = createDate;
-//        this.updateDate = updateDate;
-//    }
+    public Cart(String name, User user, Set<Product> productsList, LocalDateTime createDate, LocalDateTime updateDate) {
+        this.name = name;
+        this.user = user;
+        this.productsList = productsList;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 
 
     public Cart(String name, LocalDateTime createDate, LocalDateTime updateDate) {
@@ -61,21 +62,21 @@ public class Cart{
         this.name = name;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public List<Product> getProductsList() {
-//        return productsList;
-//    }
-//
-//    public void setProductsList(List<Product> productsList) {
-//        this.productsList = productsList;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Product> getProductsList() {
+        return productsList;
+    }
+
+    public void setProductsList(Set<Product> productsList) {
+        this.productsList = productsList;
+    }
 
     public LocalDateTime getCreateDate() {
         return createDate;

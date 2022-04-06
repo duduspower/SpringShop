@@ -1,26 +1,33 @@
 package appData;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
     private String name;
+
+    @OneToMany
+    private Set<Product> productList;
 
     public Category() {
     }
 
     public Category(String name) {
         this.name = name;
+    }
+
+    public Category(String name, Set<Product> productList) {
+        this.name = name;
+        this.productList = productList;
     }
 
     public int getId() {
@@ -37,5 +44,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(Set<Product> productList) {
+        this.productList = productList;
     }
 }

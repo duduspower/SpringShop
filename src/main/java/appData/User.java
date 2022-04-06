@@ -3,13 +3,15 @@ package appData;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "shop_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 //    @NotBlank
@@ -33,10 +35,13 @@ public class User {
 //    @NotBlank
     private String password;
 
+    @OneToMany
+    private Set<Cart> carts;
+
     public User() {
     }
 
-    public User(String username, String name, String surname, int age, String email, String phone, String password) {
+    public User(String username, String name, String surname, int age, String email, String phone, String password, Set<Cart> carts) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -44,6 +49,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.carts = carts;
     }
 
     public int getId() {
@@ -106,7 +112,13 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) {this.password = password;}
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
 }
